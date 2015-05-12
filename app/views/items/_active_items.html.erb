@@ -1,0 +1,41 @@
+<% if @active_items.empty? %>
+  <h4>No active items at this time.</h4>
+<% else %>
+  <h4>Available Items</h4>
+  <div class="row">
+    <% @active_items.each do |item| %>
+      <div class="col s4 center">
+        <div class="card white extralarge">
+
+        <div class="card-image">
+          <% if item.picture_url.nil? %>
+            <%= image_tag 'img_not_available.png' %>
+          <% else %>
+              <%= image_tag item.picture_url %>
+          <% end %>
+          <span class="card-title white-text">
+              <% if logged_in? && current_user.role?(:admin) %> Name: <% end %><%= item.name %>
+          </span>
+        </div>
+
+          <div class="content">
+            <p><%= item.description %></p>
+            <p>
+              <b>Units</b>: <%= item.units_per_item %> <% if item.category == "bread" %>loaf<% else %><%= item.category %><% end %>
+            </p>
+            <p>
+              <b>Price</b>: <%= number_to_currency(item.current_price) %>
+            </p>
+          </div>
+
+          <div class="card-action">
+            <%= link_to "View Item Details", item_path(item) %>
+            <% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %><%= link_to "Add to Cart", add_item_path(item.id) %><% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= will_paginate @active_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+<% end %>

@@ -1,0 +1,33 @@
+<% if @active_employees.empty? %>
+  <h4>No active employees at this time.</h4>
+<% else %>
+  <h4>Active Employees</h4>
+
+  <table class="striped centered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @active_employees.each do |user| %>
+        <tr>
+          <td><%= link_to user.username, user_path(user) %></td>
+          <td><%= user.role.capitalize %></td>
+          <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="users/<%= user.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p class="supertiny"></p>
+
+  <!-- Add the pagination using will_paginate gem -->
+  <span class="smtext">
+  <%= will_paginate @active_employees, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+  </span>
+  <br>
+<% end %>

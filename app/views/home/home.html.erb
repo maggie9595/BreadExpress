@@ -1,0 +1,15 @@
+<% if !logged_in? %>
+	<!-- General home page for guests -->
+	<%= render :partial => 'general_home' %>
+<% elsif logged_in? %>
+	<!-- Customized home pages depending on the role of the user -->
+	<% if current_user.role?(:admin) %>
+		<%= render :partial => 'admin_home' %>
+	<% elsif current_user.role?(:baker) %>
+		<%= render :partial => 'baker_home' %>
+	<% elsif current_user.role?(:shipper) %>
+		<%= render :partial => 'shipper_home' %>
+	<% elsif current_user.role?(:customer) %>
+		<%= render :partial => 'customer_home' %>
+	<% end %>
+<% end %>

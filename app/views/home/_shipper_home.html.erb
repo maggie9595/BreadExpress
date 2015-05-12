@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+		<div class="col s12 center">
+			<%= image_tag 'shipper.jpg', class: "rounded-corners center", height: "300px" %> 
+			<h4>Today's Shipping List</h4>
+			<br>
+
+			<table class="bordered hoverable centered">
+			  <thead>
+			    <tr>
+			      <th width="225">Recipient</th>
+			      <th width="225">Address</th>
+			      <th width="250">Items</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <% @shipping_list.each do |order| %>
+			      <tr>
+			        <td><%= order.address.recipient %></td>
+			        <td><%= render :partial => "partials/address_info", locals: {address: order.address} %></td>
+			        <td>
+			          <% order.order_items.each do |oi| %>
+			            <br><%= oi.quantity %> <%= oi.item.name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn-floating btn-tiny waves-effect waves-light purple lighten-3" href=""><i class="tiny mdi-maps-local-shipping"></i></a><br /><br>
+			          <% end %>
+			        </td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+			<%= will_paginate @shipping_list, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+		</div>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>A &amp; M Bread Express</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class="row">
+      <div id="main_content">
+        <!-- MAIN CONTENT GOES HERE -->
+        <%= render 'partials/nav' %>
+
+        <%= render 'partials/flash' %>
+
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 center">
+          <%= render 'partials/footer' %>
+        </div>
+      </div> 
+    </div>
+  </footer>
+</html>

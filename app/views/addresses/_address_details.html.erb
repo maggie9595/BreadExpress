@@ -1,0 +1,29 @@
+<h4>Address Information</h4>
+<u>
+	<% if @address.active && @address.is_billing %>
+		<b>Active Billing Address</b>
+	<% elsif @address.active && !(@address.is_billing) %>
+		<b>Active Shipping Address</b>
+	<% elsif !(@address.active) && !(@address.is_billing) %>
+		<b>Inactive Shipping Address</b>	
+	<% else %>
+		<b>Inactive Billing Address</b>
+	<% end %>
+</u>
+
+<% unless current_user.role?(:customer) %>
+	<p>
+		<b>Customer Name</b>: <%= link_to @address.customer.proper_name, customer_path(@address.customer_id) %>
+	</p>
+<% end %>
+
+<p>
+  <b>Recipient</b>: <%= @address.recipient %>
+</p>
+
+<p>
+  <b>Address</b>: <br>
+  <%= render :partial => "partials/address_info", locals: {address: @address} %>
+</p>
+
+<br>

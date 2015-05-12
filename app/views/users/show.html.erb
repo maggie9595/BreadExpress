@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+	    <%= render partial: "employee_details" %>
+	  	<br>
+
+	    <!-- Button for editing user account -->
+		<div class="button"><%= link_to 'Edit Account', edit_user_path(@user), :class => 'btn waves-effect waves-light purple lighten-3' %></div>
+	</div>
+  </div>
+</div>

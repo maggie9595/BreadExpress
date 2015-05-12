@@ -1,0 +1,29 @@
+<div class="row">
+  <p>&nbsp;</p>
+  <hr class="fancy2">
+  
+  <div class="col s3">
+    &nbsp;
+  </div>
+  
+  <div class="col s6 center">
+    <br>
+    <h5>Similar Items</h5>
+    <table class="centered hoverable bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Add to Cart</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @similar_items.each do |item| %>
+          <tr>
+            <td><%= link_to item.name, item_path(item) %></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="/add_item/<%= item.id %>"><i class="mdi-action-add-shopping-cart"></i></a></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

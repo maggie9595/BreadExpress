@@ -1,0 +1,35 @@
+<% if @active_customers.empty? %>
+  <h4>No active customers at this time.</h4>
+<% else %>
+  <h4>Active Customers</h4>
+
+  <table class="striped centered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @active_customers.each do |customer| %>
+        <tr>
+          <td><%= link_to customer.name, customer_path(customer) %></td>
+          <td><%= number_to_phone customer.phone %></td>
+          <td><%= mail_to customer.email, customer.email, encode: "javascript" %></td>
+          <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="customers/<%= customer.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p class="supertiny"></p>
+
+  <!-- Add the pagination using will_paginate gem -->
+  <span class="smtext">
+  <%= will_paginate @active_customers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+  </span>
+  <br>
+<% end %>

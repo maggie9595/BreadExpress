@@ -1,0 +1,50 @@
+<%= simple_form_for @order, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>New order</legend>
+    <b>
+    Your shipping cost is <%= number_to_currency(@shipping_cost) %> and your grand total is <%= number_to_currency(@order.grand_total) %>.<br>
+    Please enter your information below to check out.<br><br></b>
+
+    <% if current_user.role?(:admin) %>
+      <div class="input-field col s12">
+        <%= f.association :customer, collection: Customer.active.alphabetical.all %>
+      </div>
+      <p>&nbsp;</p>
+    <% else %>
+      <%= f.input :customer_id, as: :hidden, input_html: { value: current_user.customer.id } %>
+    <% end %>
+
+    Credit card information:<br>
+    <div class="input-field col s6">
+      <%= f.input :credit_card_number %>
+    </div>
+    <div class="input-field col s3">
+      <%= f.input :expiration_month, include_blank: true, collection: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] %>
+    </div>
+    <div class="input-field col s3">
+      <%= f.input :expiration_year, include_blank: true, collection: [Date.today.year, Date.today.year + 1, Date.today.year + 2, Date.today.year + 3, Date.today.year + 4, Date.today.year + 5, Date.today.year + 6, Date.today.year + 7, Date.today.year + 8, Date.today.year + 9, Date.today.year + 10] %>
+    </div>
+
+    <p>&nbsp;</p>
+    Shipping address:<br>
+    <% if current_user.role?(:admin) %>
+      <div class="input-field col s12">
+        <%= f.association :address, collection: Address.active.by_recipient.all, label_method: :to_s, label:false %>
+      </div>
+    <% else %>
+      <div class="input-field col s12">
+        <%= f.association :address, collection: current_user.customer.addresses.active.by_recipient.all, label_method: :to_s, label: false %>
+      </div>
+    <% end %>
+      
+    <p>&nbsp;</p>
+    <!-- buttons -->
+    <div class="form-actions row">
+      <div class="col s12">
+      <%= f.submit "Submit Order", class: 'btn purple lighten-3' %><br><br>
+        <div class="button"><%= link_to 'Back', cart_path, :class => 'btn purple lighten-3' %></div>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>

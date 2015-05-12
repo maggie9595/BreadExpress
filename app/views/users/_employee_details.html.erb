@@ -1,0 +1,8 @@
+<h4>Employee Information:</h4>
+
+<b>Username:</b> <%= @user.username %><br />
+(A Bread Express employee since <%= @user.created_at.year %>.)<br /><br />
+
+<b>Role:</b> <%= @user.role.capitalize %><br /><br />
+
+<b>Active:</b> <%= @user.active ? "Yes" : "No" %><br /><br />

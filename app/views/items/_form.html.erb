@@ -1,0 +1,36 @@
+<%= simple_form_for @item, :html => { :multipart => true, :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Item</legend>
+
+    <div class="input-field col s12">
+      <%= f.input :name %>
+    </div>
+    <div class="input-field text-area col s12">
+      <%= f.input :description, input_html: {class: "materialize-textarea"} %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.input :picture %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.input :category, collection: Item::CATEGORIES %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.input :units_per_item %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.input :weight %>
+    </div>
+    <div class="input-field col s2">
+      <%= f.input :active %><br><br>
+    </div>
+    
+    <!-- buttons -->
+    <div class="form-actions row">
+      <div class="col s12">
+        <%= f.submit nil, class: 'btn purple lighten-3' %><br><br>
+        <div class="button"><%= link_to 'Cancel', items_path, :class => 'btn purple lighten-3' %></div>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>

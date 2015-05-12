@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="col s12 center">
+			<%= image_tag 'baker.JPG', class: "rounded-corners center", height: "300px" %> 
+			<h4>Today's Baking List</h4>
+			<br>
+		</div>
+		<div class="col s4 center">
+			<%= render partial: "baking_list", locals: {category: "bread", baking_list: @bread_baking_list}%>
+		</div>
+		<div class="col s4 center">
+			<%= render partial: "baking_list", locals: {category: "muffins", baking_list: @muffins_baking_list}%>
+		</div>
+		<div class="col s4 center">
+			<%= render partial: "baking_list", locals: {category: "pastries", baking_list: @pastries_baking_list}%>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col s12 center">
+			<%= render :partial => "item_details" %>
+			
+			<!-- Show price history to admins -->
+			<% if logged_in? && current_user.role?(:admin) %>
+				<%= render :partial => "price_history" %>
+			<% end %>
+
+			<br>
+			<!-- Add buttons to list all, edit object or destroy object -->
+			<%= render partial: "partials/object_options", locals: {model_name: "item", object: @item}  %>
+
+			<!-- Add a button for adding active items to cart for customers and admins -->
+			<% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
+				<% if current_user.role?(:admin) %><br><% end %>
+				<% if @item.active %>
+					<div class="button"><%= link_to 'Add To Cart', add_item_path(@item.id), :class => 'btn purple lighten-3' %></div>
+				<% end %>
+			<% end %>
+
+			<!-- Show similar items to customers and guests -->
+			<% if (logged_in? && current_user.role?(:customer)) || !logged_in? %>
+				<%= render :partial => "similar_items" %>
+			<% end %>
+			
+		</div>
+	</div>
+</div>

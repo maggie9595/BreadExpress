@@ -1,0 +1,30 @@
+<%= simple_form_for @user, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Employee</legend>
+    <div class="input-field col s12">
+      <%= f.input :username %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.input :password %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.input :password_confirmation %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.input :role, collection: User::ROLES %>
+    </div>
+    <div class="input-field col s1">
+      <%= f.input :active %><br><br>
+    </div>
+  
+    <!-- buttons -->
+    <div class="form-actions row">
+      <div class="col s12 center">
+        <br>
+        <%= link_to f.submit nil, class: 'btn purple lighten-3' %>
+        <br><br>
+        <div class="button"><%= link_to 'Cancel', users_path, :class => 'btn purple lighten-3' %></div>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+    	<% if !@pending_orders.empty? %>
+			  <%= render :partial => "orders/order_list", locals: {status: 'Pending', orders: @pending_orders} %>
+			<% else %>
+				<h4>There are currently no pending orders.</h4><br>
+			<% end %>
+
+			<div class="button">
+				<br>
+	  		<%= link_to(orders_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+				View All Orders
+				<% end %>
+			</div>
+			<br><br>
+
+			<hr class="fancy2">
+			<br>
+			<h4>Recently Updated Items</h4>
+			<table class="striped centered">
+			  <thead>
+			    <tr>
+			      <th>Name</th>
+			      <th>Unit</th>
+			      <th>Price</th>
+			      <th>&nbsp;</th>
+			      <th>&nbsp;</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <% @recent_items.each do |item| %>
+			      <tr>
+			        <td><%= item.name %></td>
+			        <td>
+			          <%= item.units_per_item %> <% if item.category == "bread" %>loaf<% else %><%= item.category %><% end %>
+			        </td>
+			        <td><%= number_to_currency(item.current_price) %></td>      
+			        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="items/<%= item.id %>"><i class="mdi-action-visibility"></i></a></td>
+			        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="items/<%= item.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		  <br>
+    	<%= will_paginate @recent_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+
+  		<div class="button">
+				<br>
+	  		<%= link_to(items_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+				View All Items
+				<% end %>
+				&nbsp;&nbsp;
+				<%= link_to(new_item_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+				Add New Item
+				<% end %>
+			</div>
+
+  		<br><br>
+  		<hr class="fancy2">
+			<br>
+			<h4>New Bread Express Users</h4>
+			<table class="striped centered">
+			  <thead>
+			    <tr>
+			      <th>Username</th>
+			      <th>Role</th>
+			      <th>&nbsp;</th>
+			      <th>&nbsp;</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <% @new_users.each do |user| %>
+			      <tr>
+			        <td><%= user.username %></td>
+			        <td><%= user.role.capitalize %></td>    
+			        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="users/<%= user.id %>"><i class="mdi-action-visibility"></i></a></td>
+			        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="users/<%= user.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		  <br>
+    	<%= will_paginate @new_users, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+
+			<div class="button">
+				<br>
+	  		<%= link_to(users_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+				View All Users
+				<% end %>
+				&nbsp;&nbsp;
+				<%= link_to(new_user_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+				Create New User
+				<% end %>
+			</div>
+		</div>
+  </div>
+</div>

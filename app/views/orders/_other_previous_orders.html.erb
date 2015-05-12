@@ -1,0 +1,35 @@
+<!-- Other Previous Orders For Show Page -->
+<% if @other_previous_orders.empty? %>
+	<% if logged_in? && !current_user.role?(:customer) %>
+		<h5>No other orders have been placed by this customer yet.</h5>
+	<% elsif logged_in? && current_user.role?(:customer) %>
+		<h5>You have not placed any other orders yet.</h5>
+	<% end %>
+<% else %>
+	<br>
+	<hr class="fancy2">
+	<br>
+	<% if current_user.role?(:customer) %>
+		<h5>Order History:</h5>
+		<p>
+	  		<em>Thanks for being a Bread Express customer since <%= @order.customer.created_at.year %>.</em>
+		</p>
+	<% else %>
+		<h5><%= @order.customer.proper_name %>'s Order History:</h5>
+	<% end %>
+
+	<table class="striped centered">
+	<thead>
+		<th>Date</th>
+		<th>Amount</th>
+	</thead>
+
+	<% for order in @other_previous_orders %>
+		<tr>
+			<td><%= link_to order.date.strftime("%m/%d/%y"), order_path(order) %></td>
+			<td>$<%= number_with_precision(order.grand_total, :precision => 2) %></td>
+		</tr>
+	<% end %>
+	</table>
+<% end %>
+<br>

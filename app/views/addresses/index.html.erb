@@ -1,0 +1,12 @@
+<%= render partial: "partials/index_structure", locals: {model_name: "address", 
+                                                         primary: "active_addresses", 
+                                                         secondary: "inactive_addresses"} %>
+
+<!-- Add a new address link for customers because it's not showing up from index structures -->
+<% if current_user.role?(:customer) %>
+	<center>
+		<%= link_to(new_address_path, class: "btn waves-effect waves-light purple lighten-3") do %>
+			Add a New Address
+		<% end %>                                                         
+	</center>     
+<% end %>                                                         

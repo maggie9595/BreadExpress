@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+      <%= render :partial => "order_details" %>
+
+      <%= render partial: "other_previous_orders", locals: {other_previous_orders: @other_previous_orders} %>
+
+      <% if logged_in? && current_user.role?(:customer) %>
+        <div class="form-actions button">
+          <%= link_to orders_path, class: 'btn waves-effect waves-light purple lighten-3' do %>
+            &nbsp;Return to My Orders
+          <% end %>
+        </div>
+      <% else %>
+        <div class="form-actions button">
+          <%= link_to orders_path, class: 'btn waves-effect waves-light purple lighten-3' do %>
+            &nbsp;Display All Orders
+          <% end %>
+          <!-- Only show delete button if order can be deleted -->
+          <% if @order.is_destroyable? %>
+            <br><br>
+            <%= link_to(@order, method: 'delete', data: {confirm: "Are you sure you want to permanently delete this order?"}, class: 'btn waves-effect waves-light purple lighten-3 alert') do %>
+            &nbsp;Delete Order
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

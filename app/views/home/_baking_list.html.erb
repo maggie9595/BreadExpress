@@ -1,0 +1,22 @@
+<h5><%= category.capitalize %></h5>
+<% if baking_list.blank? %>
+	<p>All done!</p>
+<% else %>
+	<table class="striped centered">
+		<thead>
+		  <tr>
+		    <th>Item</th>
+		    <th>Quantity</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <% baking_list.each do |item, quantity| %>
+		    <tr>
+		      <td><%= item %></td>
+		      <td><%= quantity %></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+	</table>
+<% end %>

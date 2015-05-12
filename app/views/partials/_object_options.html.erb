@@ -1,0 +1,36 @@
+<% if logged_in? %>
+  <% opt = "#{object.respond_to?(:name) ? object.name : model_name.capitalize }" %>
+
+  <div class="form-actions">
+    <% if can? :index, object %>
+      <div class="button">
+        <%= link_to(eval("#{model_name.pluralize}_path"), class: 'btn waves-effect waves-light purple lighten-3') do %>
+          &nbsp;Display All <%= model_name.pluralize.capitalize %>
+       <% end %>
+      </div>
+      &nbsp;&nbsp;
+    <% end %>
+    
+    <% if can? :update, object %>
+      <div class="button">
+        <%= link_to(eval("edit_#{model_name}_path(object)"), class: 'btn waves-effect waves-light purple lighten-3') do %>
+          &nbsp;
+          <% if current_user.role?(:admin) %>
+            <%= "Edit #{opt}" %>
+          <% else %>
+            <%= "Edit" %>
+          <% end %>
+        <% end %>
+      </div>
+      &nbsp;&nbsp;
+    <% end %>
+    
+    <% if (current_user.role?(:admin) && model_name != "customer") || model_name == "address" %>
+      <div class="button">
+        <%= link_to(eval("#{model_name}_path(object)"), method: 'delete', data: {confirm: "Are you sure you want to permanently delete this #{opt.downcase}?"}, class: 'btn waves-effect waves-light purple lighten-3 alert') do %>
+          &nbsp;<%= "Delete #{opt.downcase}" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

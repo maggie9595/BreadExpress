@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+    	<%= image_tag 'bread.jpg', class: "rounded-corners center", height: "300px" %>
+    	<% if !@pending_orders.empty? %>
+			  <%= render :partial => "orders/order_list", locals: {status: 'Pending', orders: @pending_orders} %>
+			<% end %>
+
+			<h4>Suggestions for You</h4>
+		  <div class="row">
+		    <% @suggested_items.each do |item| %>
+		      <div class="col s4 center">
+		        <div class="card white extralarge">
+
+		        <div class="card-image">
+		          <% if item.picture_url.nil? %>
+		            <%= image_tag 'img_not_available.png' %>
+		          <% else %>
+		              <%= image_tag item.picture_url %>
+		          <% end %>
+		          <span class="card-title white-text">
+		              <% if logged_in? && current_user.role?(:admin) %> Name: <% end %><%= item.name %>
+		          </span>
+		        </div>
+
+		          <div class="content">
+		            <p><%= item.description %></p>
+		            <p>
+		              <b>Units</b>: <%= item.units_per_item %> <% if item.category == "bread" %>loaf<% else %><%= item.category %><% end %>
+		            </p>
+		            <p>
+		              <b>Price</b>: <%= number_to_currency(item.current_price) %>
+		            </p>
+		          </div>
+
+		          <div class="card-action">
+		            <%= link_to "View Item Details", item_path(item) %>
+		            <% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %><%= link_to "Add to Cart", add_item_path(item.id) %><% end %>
+		          </div>
+		        </div>
+		      </div>
+    		<% end %>
+    		<%= will_paginate @suggested_items, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+  		</div>
+
+  		<h5><u><%= link_to "Shop Our Complete Menu", items_path %></h5></u>
+		</div>
+  </div>
+</div>

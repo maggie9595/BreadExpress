@@ -1,0 +1,30 @@
+<h4><%= @item.name %></h4>
+<br>
+<% if @item.picture_url.nil? %>
+	<%= image_tag 'img_not_available.png', class: "rounded-corners center", height: "250px" %>
+<% else %>
+    <%= image_tag @item.picture_url, class: "rounded-corners center", height: "250px" %>
+<% end %>
+
+<p>
+  <b>Description</b>: <%= @item.description %>
+</p>
+
+<p>
+  <b>Units</b>: <%= @item.units_per_item %> <% if @item.category == "bread" %>loaf<% else %><%= @item.category %><% end %>
+</p>
+
+<p>
+  <b>Price</b>: <%= number_to_currency(@item.current_price) %>
+</p>
+
+
+<p>
+  <b>Total weight</b>: <%= pluralize(@item.weight, "lb") %>.
+</p>
+
+<% unless logged_in? && current_user.role?(:customer) %>
+	<p>
+		<b>Active</b>: <%= @item.active ? "Yes" : "No" %>
+	</p>
+<% end %>

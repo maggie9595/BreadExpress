@@ -1,0 +1,185 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require jquery-ui
+ *= require materialize
+ *= require font-awesome.min
+  *= require_tree .
+ */
+
+.rounded-corners {
+  border-radius: 50px;
+}
+
+.invisible {
+	display: none;
+}
+
+/*link styles*/
+.col a {
+	color: #6a1b9a;
+}
+
+body a {
+	color: #6a1b9a;
+}
+
+#login a:hover {
+	text-decoration: underline;
+}
+
+.col a:hover {
+	text-decoration: underline;
+}
+/*end link styles*/
+
+h1, h2, h3, h4, h5, h6 {
+	color: #4a148c;
+}
+
+.button a {
+	color: white;
+}
+
+.button a:hover {
+	text-decoration: none;
+}
+
+/* form styles */
+/* change label underline focus color to purple */
+.input-field input[type=text]:focus, .input-field input[type=tel]:focus, .input-field input[type=email]:focus, .input-field input[type=url]:focus, .input-field input[type=date]:focus, .input-field input[type=number]:focus {
+ 	border-bottom: 1px solid #6a1b9a;
+ 	box-shadow: 0 1px 0 0 #6a1b9a;
+}
+
+input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #6a1b9a !important;
+  box-shadow: 0px 1px 0px 0px #6a1b9a !important;
+}
+
+.input-field [type="checkbox"]:checked + label::before {
+	border-color: transparent #6a1b9a #6a1b9a transparent;
+}
+
+
+/* changing the dropdown menu text to black */
+.dropdown-content li > a, .dropdown-content li > span {
+	color: black !important;
+}
+
+nav ul a {
+	color: black !important;
+}
+
+.brand-logo {
+	margin-top: 9px;
+}
+
+hr.fancy{
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
+}
+
+hr.fancy2 {
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+hr.fancy2:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.5em;
+  padding: 0 0.25em;
+  background: white;
+}
+
+#login {
+	margin-left: 13px;
+}
+
+/* Flash messages and errors */
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #f3e5f5;
+  border: solid 1px #8c24cc;
+}
+
+#flash_error {
+  background-color: #f3e5f5;
+  border: solid 1px #8c24cc;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}  
+
+.content {
+  margin: 15px;
+}
+
+.card.extralarge {
+  height: 600px;
+}
+
+.card.extralarge .card-action {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}

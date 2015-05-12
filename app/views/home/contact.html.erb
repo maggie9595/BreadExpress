@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+		<br>
+		<%= image_tag 'bread.jpg', class: "center" %> 
+		<h2>
+			Contact Us
+		</h2>
+
+		<table class="striped centered">
+			<tr class="purple lighten-5">
+				<td>Webmaster:</td>
+				<td>Maggie Yu</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td>
+				<%= mail_to("maggieyu@cmu.edu", "Click here to email the webmaster", encode: "javascript") %> 
+				</td>
+			</tr>
+			<tr class="purple lighten-5">
+				<td>Phone:</td>
+				<td>412-000-0000</td>
+			</tr>
+		</table>
+	</div>
+  </div>
+</div>

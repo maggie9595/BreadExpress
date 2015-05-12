@@ -1,0 +1,24 @@
+<!-- display an error message if there are no inactive customers in the system -->
+<% if @inactive_customers.empty? %>
+  <h4>No inactive customers at this time.</h4>
+<% else %>
+  <h4>Inactive Customers</h4>
+
+  <table class="striped centered">
+    <tbody>
+      <% @inactive_customers.each do |customer| %>
+        <tr>
+          <td><%= link_to customer.name, customer_path(customer) %>&nbsp;&nbsp;&nbsp;&nbsp;
+          	<a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="customers/<%= customer.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p class="supertiny"></p>
+
+  <!-- Add the pagination using will_paginate gem -->
+  <span class="smtext">
+  <%= will_paginate @inactive_customers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+  </span>
+<% end %>

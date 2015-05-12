@@ -1,0 +1,19 @@
+<h4>Customer Information:</h4>
+<% if logged_in? && !current_user.role?(:customer) %>
+	<% if @customer.active %>
+		<b>Active Customer</b>
+	<% else %>
+		<b>Inactive Customer</b>
+	<% end %>
+	<br><br>
+<% end %>
+
+<b>Name:</b><br>
+<%= @customer.proper_name %><br />
+(A Bread Express customer since <%= @customer.created_at.year %>.)<br /><br />
+
+<b>Phone:</b><br>
+<%= number_to_phone(@customer.phone) %><br /><br />
+
+<b>Email:</b><br>
+<%= mail_to @customer.email, @customer.email, encode: "javascript" %><br /><br />

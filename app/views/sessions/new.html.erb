@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+      <br>
+      <h3>Log In</h3>
+      <p>Don't have an account yet? <%= link_to "Sign up now!", signup_path %></p>
+
+      <%= form_tag sessions_path do %>
+        <div class="row">
+          <div class="col s3">
+            <p>
+          </div>
+          <div class="input-field col s6 center">
+            <%= label_tag :username %>
+            <%= text_field_tag :username, params[:username] %>
+          </div>
+          <div class="col s3">
+            <p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s3">
+            <p>
+          </div>
+          <div class="input-field col s6 center">
+            <%= label_tag :password %>
+            <%= password_field_tag :password %>
+          </div>
+          <div class="col s3">
+            <p>
+          </div>
+        </div>
+        
+        <!-- buttons -->
+        <div class="form-actions row">
+          <div class="col s12">
+            <br>
+            <div class="button actions"><%= submit_tag "Log In", :class => 'btn purple lighten-3' %></div>
+            <br>
+            <div class="button"><%= link_to 'Cancel', home_path, :class => 'btn purple lighten-3' %></div>
+          </div>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

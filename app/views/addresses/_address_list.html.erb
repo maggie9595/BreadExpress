@@ -1,0 +1,42 @@
+<% if addresses.empty? %>
+  <% if current_user.role?(:customer) %>
+    <h4>You have no <%= state %> addresses at this time.</h4>
+  <% else %>
+    <h4>There are no <%= state %> addresses at this time.</h4>
+  <% end %>
+  <br>
+<% else %>
+<h2><%= state.capitalize %> Addresses</h2>
+<table class="striped centered">
+  <thead>
+    <tr>
+      <% unless current_user.role?(:customer) %>
+        <th>Customer</th>
+      <% end %>
+      <th>Recipient</th>
+      <th>Address</th>
+      <th>Billing?</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% addresses.each do |address| %>
+      <tr>
+        <% unless current_user.role?(:customer) %>
+          <td><%= link_to address.customer.proper_name, customer_path(address.customer) %></td>
+        <% end %>
+        <td><%= address.recipient %></td>
+        <td>
+          <%= render :partial => "partials/address_info", locals: {address: address} %>
+        </td>
+        <td><%= address.is_billing ? "Yes" : "No" %></td>      
+        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="addresses/<%= address.id %>"><i class="mdi-action-visibility"></i></a></td>
+        <td><a class="btn-floating btn-small waves-effect waves-light purple lighten-3" href="addresses/<%= address.id %>/edit"><i class="mdi-image-edit"></i></a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate addresses, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+<% end %>
+<br>

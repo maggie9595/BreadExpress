@@ -1,0 +1,82 @@
+<!-- navigation bar for the home page -->
+<nav class="purple lighten-4">
+  <div class="nav-wrapper purple lighten-4">
+    <%= link_to image_tag("breadexpress_title.png"), home_path, :class => "brand-logo left" %> 
+    <ul class="right">
+      <!-- link to home -->
+      <li><%= link_to "Home", home_path %></li>
+
+      <!-- GUEST OPTIONS -->
+      <% if !logged_in? %>
+        <li><%= link_to "View Menu", items_path %></li>
+      <% end %>
+      
+      <!-- CUSTOMER OPTIONS -->
+      <% if logged_in? && current_user.role?(:customer) %>
+        <!-- dropdown options for my account -->
+        <ul id="dropdown1" class="dropdown-content">
+          <li><%= link_to "View My Account", customer_path(current_user.customer) %></li>
+          <li><%= link_to "Update My Account", edit_customer_path(current_user.customer) %></li>
+          <li><%= link_to "My Orders", orders_path %></li>
+          <li><%= link_to "My Addresses", addresses_path %></li>
+        </ul>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-button" data-activates="dropdown1">My Account<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+
+        <li><%= link_to "Shop", items_path %></li>
+        <li><%= link_to "Cart (#{session[:cart].size})", cart_path %></li>
+      <% end %>
+
+      <!-- ADMIN ONLY OPTIONS -->
+      <% if logged_in? && current_user.role?(:admin) %>
+        <li><%= link_to "My Account", user_path(current_user) %></li>
+
+        <!-- dropdown options for items -->
+        <ul id="dropdown3" class="dropdown-content">
+          <li><%= link_to "All Items", items_path %></li>
+          <li><%= link_to "Add an Item", new_item_path %></li>
+        </ul>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-button" data-activates="dropdown3">Items<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+
+        <!-- dropdown options for addresses -->
+        <ul id="dropdown2" class="dropdown-content">
+          <li><%= link_to "All Addresses", addresses_path %></li>
+          <li><%= link_to "Add an Address", new_address_path %></li>
+        </ul>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-button" data-activates="dropdown2">Addresses<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+
+        <!-- dropdown options for addresses -->
+        <ul id="dropdown4" class="dropdown-content">
+          <li><%= link_to "Customers", customers_path %></li>
+          <li><%= link_to "Employees", users_path %></li>
+        </ul>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-button" data-activates="dropdown4">Users<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+
+        <li><%= link_to "Orders", orders_path %></li>
+        <li><%= link_to "Cart (#{session[:cart].size})", cart_path %></li>
+      <% end %>
+
+      <!-- SHIPPER & BAKER OPTIONS -->
+      <% if logged_in? && (current_user.role?(:shipper) || current_user.role?(:baker)) %>
+        <li><%= link_to "View Items", items_path %></li>
+        <li><%= link_to "My Account", user_path(current_user) %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<!-- The welcome/log in/sign up bar below the navbar -->
+<div id="login">
+  <br>
+  <% if logged_in? && (current_user.role?(:customer) || !current_user.customer.nil?) %>
+    <!-- only display the user's proper name if it exists in the system -->
+    Welcome, <%= current_user.customer.proper_name %>! | <%= link_to 'Log out', logout_path %>
+  <% elsif logged_in? && current_user.customer.nil? %>
+    Welcome, <%= current_user.username %>! | <%= link_to 'Log out', logout_path %>
+  <% else %>
+    Welcome, Guest! | <%= link_to 'Log in', login_path %> | <%= link_to "Sign up", signup_path %>
+  <% end %>
+</div>
